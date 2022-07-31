@@ -30,7 +30,12 @@ jobs:
         run: echo ${{ steps.changed-files.outputs.all_changed_files }}
 
       - name: Lint with flake8
-        run: flake8 ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $file == *.py ]]; then
+              flake8 $file
+            fi
+          done
         # continue-on-error: true
   core-unit:
     name: GangaCore Unit
