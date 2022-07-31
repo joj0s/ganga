@@ -23,6 +23,9 @@ jobs:
           python3 -m pip install --upgrade pip setuptools wheel
           python3 -m pip install flake8
 
+      - name: Setup flake8 annotations
+        uses: rbialon/flake8-annotations@v1
+
       - name: Echo changed files
         run: echo ${{ steps.changed-files.outputs.all_changed_files }}
 
