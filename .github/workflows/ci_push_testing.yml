@@ -32,16 +32,16 @@ jobs:
         id: flake8
         continue-on-error: true
         run: |
-          files_to_lint="lul"
-          for file in setup.py ganga/GangaCore/Lib/Executable/Executable.py; do
+          files_to_lint=""
+          count=0
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ $file == *.py ]]; then
-              flake8 $file
-              if [[ $? != 0 ]]; then
+              count=`flake8 --count --exit-zero $file | tail -1`
+              if [[ $count > 0 ]]; then
                 files_to_lint="$files_to_lint $file"
               fi
             fi
           done
-          echo $files_to_lint
           echo "::set-output name=test::$files_to_lint";
 
   autopep:
