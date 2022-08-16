@@ -7,6 +7,8 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     continue-on-error: true
+    outputs:
+      output1: ${{ steps.flake8.outputs.test }}
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python 3.8
@@ -27,12 +29,14 @@ jobs:
         uses: rbialon/flake8-annotations@v1
 
       - name: Lint with flake8
+        id: flake8
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ $file == *.py ]]; then
               flake8 $file
-            fi1
+            fi
           done
+          echo "::set-output name=test::$?"
 
   autopep:
     # if: startsWith(github.head_ref, 'autopep8-patches') == false && needs.lint.result == 'failure'
@@ -40,7 +44,7 @@ jobs:
     needs: lint
     steps:
       - name: test
-        run: echo ${{ needs.lint.outputs }}
+        run: echo ${{ needs.lint.outputs.test }}
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
