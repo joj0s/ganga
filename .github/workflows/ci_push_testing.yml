@@ -34,7 +34,7 @@ jobs:
             fi
           done
 
-  autopep8:
+  autopep:
     if: startsWith(github.head_ref, 'autopep8-patches') == false && needs.lint.result == "failure"
     runs-on: ubuntu-latest
     needs: lint
@@ -43,7 +43,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-    - name: Get changed files
+      - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v24
 
