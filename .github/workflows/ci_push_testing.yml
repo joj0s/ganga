@@ -37,6 +37,7 @@ jobs:
             fi
           done
           echo "::set-output name=test::$?"
+          echo "--------"
 
   autopep:
     # if: startsWith(github.head_ref, 'autopep8-patches') == false && needs.lint.result == 'failure'
