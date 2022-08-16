@@ -40,6 +40,7 @@ jobs:
               fi
             fi
           done
+          echo $files_to_lint
           echo "::set-output name=test::$files_to_lint";
 
   autopep:
