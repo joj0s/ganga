@@ -34,7 +34,7 @@ jobs:
           files_to_lint="lul"
           for file in setup.py ganga/GangaCore/Lib/Executable/Executable.py; do
             if [[ $file == *.py ]]; then
-              flake8 --exit-zero $file
+              flake8 $file
               if [[ $? != 0 ]]; then
                 files_to_lint="$files_to_lint $file"
               fi
