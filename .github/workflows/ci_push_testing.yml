@@ -31,7 +31,7 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ $file == *.py ]]; then
               flake8 $file
-            fi
+            fi1
           done
 
   autopep:
@@ -40,7 +40,7 @@ jobs:
     needs: lint
     steps:
       - name: test
-        run: echo ${{ needs.lint.result }}
+        run: echo ${{ needs.lint.outputs }}
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
