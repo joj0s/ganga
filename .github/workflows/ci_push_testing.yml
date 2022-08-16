@@ -6,7 +6,7 @@ jobs:
   lint:
     name: Linting
     runs-on: ubuntu-latest
-    # continue-on-error: true
+    continue-on-error: true
     outputs:
       output1: ${{ steps.flake8.outputs.test }}
     steps:
@@ -31,13 +31,14 @@ jobs:
       - name: Lint with flake8
         id: flake8
         run: |
+          files_to_lint=""
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ $file == *.py ]]; then
               flake8 $file
+              if [[ $? != 0 ]]; then
+                files_to_lint="$files_to_lint $file"
             fi
-          done
-          echo "::set-output name=test::$?"
-          echo "--------"
+          echo "::set-output name=test::$files_to_lint"
 
   autopep:
     # if: startsWith(github.head_ref, 'autopep8-patches') == false && needs.lint.result == 'failure'
