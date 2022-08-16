@@ -6,7 +6,7 @@ jobs:
   lint:
     name: Linting
     runs-on: ubuntu-latest
-    continue-on-error: true
+    # continue-on-error: true
     outputs:
       output1: ${{ steps.flake8.outputs.test }}
     steps:
