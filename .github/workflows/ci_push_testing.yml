@@ -32,16 +32,16 @@ jobs:
         id: flake8
         run: |
           files_to_lint="lul"
-          echo "::set-output name=test::$files_to_lint";
           for file in setup.py ganga/GangaCore/Lib/Executable/Executable.py; do
             if [[ $file == *.py ]]; then
-              flake8 $file
+              flake8 --exit-zero $file
               if [[ $? != 0 ]]; then
                 files_to_lint="$files_to_lint $file"
               fi
             fi
           done
           echo $files_to_lint
+          echo "::set-output name=test::$files_to_lint";
 
   autopep:
     # if: startsWith(github.head_ref, 'autopep8-patches') == false && needs.lint.result == 'failure'
