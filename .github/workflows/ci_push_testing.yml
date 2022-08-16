@@ -31,7 +31,7 @@ jobs:
       - name: Lint with flake8
         id: flake8
         run: |
-          files_to_lint=""
+          files_to_lint="lul"
           for file in setup.py ganga/GangaCore/Lib/Executable/Executable.py; do
             if [[ $file == *.py ]]; then
               flake8 $file
