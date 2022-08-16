@@ -35,7 +35,6 @@ jobs:
           done
 
   autopep8:
-    # Check if the PR is not raised by this workflow and is not from a fork
     if: startsWith(github.head_ref, 'autopep8-patches') == false && needs.lint.result == "failure"
     runs-on: ubuntu-latest
     needs: lint
