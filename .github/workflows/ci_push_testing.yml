@@ -30,6 +30,7 @@ jobs:
 
       - name: Lint with flake8
         id: flake8
+        continue-on-error: true
         run: |
           files_to_lint="lul"
           for file in setup.py ganga/GangaCore/Lib/Executable/Executable.py; do
