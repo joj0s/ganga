@@ -37,6 +37,7 @@ jobs:
               flake8 $file
               if [[ $? != 0]]; then
                 files_to_lint="$files_to_lint $file"
+              fi
             fi
           echo "::set-output name=test::$files_to_lint";
 
