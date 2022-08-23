@@ -13,7 +13,7 @@ logger = GangaCore.Utility.logging.getLogger()
 
 # GPI Proxy to manipulate configuration of all configuration units.
 # The interface of this class should resemble the regular dictionary
-# interface.
+# interface. yep
 
 
 class ConfigDescriptor(object):
