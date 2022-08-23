@@ -42,10 +42,10 @@ jobs:
               count=`echo "$linting_output" | tail -1`
               if [[ $count > 0 ]]; then
                 files_to_lint="$files_to_lint $file"
+                echo "$linting_output"
               fi
             fi
           done
-          echo "$linting_output"
           echo "::set-output name=files_to_lint::$files_to_lint";
 
       - name: Fail on linting violations
@@ -71,12 +71,14 @@ jobs:
 
       - name: Set autopep8 branch name
         id: vars
-        run: echo ::set-output name=branch-name::"autopep8-patches/${{ github.head_ref }}"
+        run: |
+          echo ::set-output name=branch-name::"autopep8-patches/${{ github.head_ref }}"
+          echo ::set-output name=pr-number::"echo ${{ github.head_ref }} | cut -f 1 -d '/'"
 
       - name: Test GH Context
         run: |
           echo "${{ github.ref_name }}" | cut -f 1 -d '/'
-          echo ${{ github.ref }}
+          echo ${{ steps.vars.outputs.pr-number }}
           echo ${{ github.base_ref }}
           echo ${{ github.head_ref }}
 
