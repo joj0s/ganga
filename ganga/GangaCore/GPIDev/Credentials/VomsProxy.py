@@ -187,4 +187,9 @@ class VomsProxy(ICredentialRequirement):
         """
         This returns the additional encoding of the identity, vo, role and group which are to be encoded into the voms file location
         """
-        return ':'.join(requirement for requirement in [self.identity, self.vo, self.role, self.group] if requirement)  # filter out the empties
+        return ':'.join(
+            requirement for requirement in [
+                self.identity,
+                self.vo,
+                self.role,
+                self.group] if requirement)  # filter out the empties
