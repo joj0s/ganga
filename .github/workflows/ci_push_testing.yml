@@ -65,8 +65,6 @@ jobs:
       - name: Set autopep8 branch name
         id: vars
         run: echo ::set-output name=branch-name::"autopep8-patches/${{ github.head_ref }}"
-        with:
-          token: ${{ secrets.MY_TOKEN }}
 
       - name: Create Pull Request
         if: steps.autopep8.outputs.exit-code == 2
