@@ -73,7 +73,8 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=branch-name::"autopep8-patches/${{ github.head_ref }}"
-          echo ::set-output name=pr-number::"echo ${{ github.head_ref }} | cut -f 1 -d '/'"
+          pr-number=`echo ${{ github.head_ref }} | cut -f 1 -d '/'`
+          echo ::set-output name=pr-number::"$pr-number"
 
       - name: Test GH Context
         run: |
