@@ -26,7 +26,7 @@ def safer_eval(_input):
                     if not isinstance(_input, str):
                         _input = str(_input)
                     _output = eval(_input)
-                except:
+                except BaseException:
                     _output = str(_input)
             else:
                 _output = None
@@ -40,7 +40,7 @@ def safer_eval(_input):
                 if not isinstance(_input, str):
                     _input = str(_input)
                 _output = eval(_input)
-            except:
+            except BaseException:
                 _output = str(_input)
         else:
             _output = None
@@ -109,7 +109,7 @@ def _valueTypeAllowed(val, valTypeList, logger=None):
 
         try:
             from GangaCore.GPIDev.Base.Objects import GangaObject
-        except:
+        except BaseException:
             GangaObject = None
 
         raw_type = stripProxy(_type)
@@ -124,7 +124,7 @@ def _valueTypeAllowed(val, valTypeList, logger=None):
                     return True
             elif isinstance(raw_val, raw_type):
                 return True
-        except:
+        except BaseException:
             continue
 
     return False
