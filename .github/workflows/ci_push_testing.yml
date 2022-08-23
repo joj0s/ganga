@@ -75,7 +75,7 @@ jobs:
 
       - name: Test GH Context
         run: |
-          echo ${{ github.ref_name }}
+          echo "${{ github.ref_name }}" | cut -f 1 -d '/'
           echo ${{ github.ref }}
           echo ${{ github.base_ref }}
           echo ${{ github.head_ref }}
