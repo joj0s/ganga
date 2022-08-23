@@ -1,12 +1,10 @@
 name: CI Push Testing
 
-on:
-  push:
-    branches:
-      - "autopep8-patches/**"
+on: [pull_request]
 
 jobs:
   lint:
+    if: startsWith(github.head_ref, 'autopep8-patches/')
     name: Linting
     runs-on: ubuntu-latest
     environment: staging_environment
