@@ -1,7 +1,7 @@
 name: CI Push Testing
 
 on:
-  pull_request:
+  push:
     branches:
       - "autopep8-patches/**"
 
