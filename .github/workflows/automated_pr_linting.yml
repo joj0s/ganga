@@ -9,11 +9,10 @@ jobs:
   lint:
     name: Linting
     runs-on: ubuntu-latest
+    environment: staging_environment
     env:
       GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
     continue-on-error: true
-    outputs:
-      files_to_lint: ${{ steps.flake8.outputs.test }}
     steps:
       - uses: actions/checkout@v1
         with:
