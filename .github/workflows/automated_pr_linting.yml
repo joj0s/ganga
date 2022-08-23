@@ -13,6 +13,8 @@ jobs:
     name: Autopep8 PR linting
     runs-on: ubuntu-latest
     environment: default
+    with:
+      token: ${{ secrets.MY_TOKEN }}
     env:
       GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
     continue-on-error: true

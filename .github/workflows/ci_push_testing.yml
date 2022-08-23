@@ -65,6 +65,8 @@ jobs:
       - name: Set autopep8 branch name
         id: vars
         run: echo ::set-output name=branch-name::"autopep8-patches/${{ github.head_ref }}"
+        with:
+          token: ${{ secrets.MY_TOKEN }}
 
       - name: Create Pull Request
         if: steps.autopep8.outputs.exit-code == 2
@@ -75,6 +77,7 @@ jobs:
           body: This is an auto-generated PR with fixes by autopep8 for the ${{ steps.vars.outputs.branch-name }} branch.
           labels: autopep8, automated pr
           branch: ${{ steps.vars.outputs.branch-name }}
+          token: ${{ secrets.MY_TOKEN }}
 
   core-unit:
     name: GangaCore Unit
