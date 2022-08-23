@@ -1,13 +1,18 @@
 name: CI Push Testing
 
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, reopened]
+  push:
+    branches:
+      - "autopep8-patches/**"
 
 jobs:
   lint:
     if: startsWith(github.head_ref, 'autopep8-patches/')
-    name: Linting
+    name: Autopep8 PR linting
     runs-on: ubuntu-latest
-    environment: staging_environment
+    environment: default
     env:
       GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
     continue-on-error: true
@@ -29,6 +34,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip setuptools wheel
           python3 -m pip install flake8
+
       - name: Setup flake8 annotations
         uses: rbialon/flake8-annotations@v1
 
