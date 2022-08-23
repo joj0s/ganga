@@ -11,6 +11,9 @@ jobs:
       files_to_lint: ${{ steps.flake8.outputs.test }}
     steps:
       - uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
@@ -30,7 +33,6 @@ jobs:
 
       - name: Lint with flake8
         id: flake8
-        continue-on-error: true
         run: |
           files_to_lint=""
           count=0
@@ -54,6 +56,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
+          fetch-depth: 0
 
       - name: Get changed files
         id: changed-files
