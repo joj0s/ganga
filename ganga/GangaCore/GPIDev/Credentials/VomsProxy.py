@@ -27,7 +27,7 @@ class VomsProxyInfo(ICredentialInfo):
         Args:
             requirements (ICredentialRequirement): An object specifying the requirements
             check_file (bool): Raise an exception if the file does not exist
-            create (bool): Create the credential file yep
+            create (bool): Create the credential file 
         """
 
         self._shell = None
