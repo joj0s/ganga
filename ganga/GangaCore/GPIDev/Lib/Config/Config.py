@@ -88,14 +88,14 @@ class ConfigProxy(object):
         levels = [markup(x, fg.red) for x in levels]
         from io import StringIO
         sio = StringIO()
-        sio.write('%s' % markup(stripProxy(self).name, name_colour) +
-                  ' : ' + markup(stripProxy(self).docstring, docstring_colour) + '\n')
+        sio.write('%s' % markup(stripProxy(self).name, name_colour)
+                  + ' : ' + markup(stripProxy(self).docstring, docstring_colour) + '\n')
         opts = sorted(stripProxy(self).options.keys())
         INDENT = '     ' * 2
         p = re.compile(r'[\.\w]*\.')
         for o in opts:
-            sio.write(levels[stripProxy(self).getEffectiveLevel(
-                o)] + '   ' + markup(o, name_colour) + ' = ' + markup(p.sub('', repr(stripProxy(self)[o])), value_colour) + '\n')
+            sio.write(levels[stripProxy(self).getEffectiveLevel(o)] + '   ' + markup(o, name_colour)
+                      + ' = ' + markup(p.sub('', repr(stripProxy(self)[o])), value_colour) + '\n')
             sio.write(textwrap.fill(markup(stripProxy(self).options[o].docstring.strip(
             ), docstring_colour), width=80, initial_indent=INDENT, subsequent_indent=INDENT) + '\n')
             typelist = stripProxy(self).options[o].typelist
@@ -272,7 +272,8 @@ def config_file_as_text(interactive):
                             pass
                     if interactive:
                         yes = input(
-                            'The config option %s %s with value %s in your old .gangarc is not the default. Do you want to copy it to the new .gangarc file ([y]/n) ?\n' % (sect.name, o, value))
+                            'The config option %s %s with value %s in your old .gangarc is not the default. Do you want to copy it to the new .gangarc file ([y]/n) ?\n' %
+                            (sect.name, o, value))
                     else:
                         yes = 'y'
                     text += '#%s = %s\n' % (o, def_value)
