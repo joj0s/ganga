@@ -73,21 +73,15 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=branch-name::"autopep8-patches/${{ github.head_ref }}"
-          pr-number=`echo ${{ github.ref_name }} | cut -f 1 -d '/'`
-          echo ::set-output name=pr-number::"$pr-number"
-
-      - name: Test GH Context
-        run: |
-          echo ${{ steps.vars.outputs.pr-number }}
-          echo ${{ github.base_ref }}
-          echo ${{ github.head_ref }}
+          PR_NUMBER=`echo ${{ github.ref_name }} | cut -f 1 -d '/'`
+          echo ::set-output name=pr-number::"$PR_NUMBER"
 
       - name: Create Pull Request
         if: steps.autopep8.outputs.exit-code == 2
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: autopep8 action fixes
-          title: PEP8 fixes by autopep8
+          title: PEP8 fixes for PR \#${steps.vars.outputs.pr-number} (${{ github.head_ref }}) by autopep8
           body: This is an auto-generated PR with fixes by autopep8 for the ${{ steps.vars.outputs.branch-name }} branch.
           labels: autopep8, automated pr
           branch: ${{ steps.vars.outputs.branch-name }}
