@@ -38,12 +38,14 @@ jobs:
           count=0
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ $file == *.py ]]; then
-              count=`flake8 --count --exit-zero $file | tail -1`
+              linting_output=`flake8 --count --exit-zero $file`
+              count=`echo "$linting_output" | tail -1`
               if [[ $count > 0 ]]; then
                 files_to_lint="$files_to_lint $file"
               fi
             fi
           done
+          echo "$linting_output"
           echo "::set-output name=files_to_lint::$files_to_lint";
 
       - name: Fail on linting violations
